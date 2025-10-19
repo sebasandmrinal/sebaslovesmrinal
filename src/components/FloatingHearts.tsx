@@ -1,20 +1,30 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import React from 'react'
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(
-  ({ className, ...props }, ref) => {
-    return (
-      <textarea
-        className={cn(
-          "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Textarea.displayName = "Textarea"
+const FloatingHearts: React.FC = () => {
+  const hearts = Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    left: `${Math.random() * 100}%`,
+    delay: `${Math.random() * 5}s`,
+    duration: `${5 + Math.random() * 5}s`,
+  }))
 
-export { Textarea }
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      {hearts.map((heart) => (
+        <div
+          key={heart.id}
+          className="absolute text-pink-400 opacity-70 animate-float-up"
+          style={{
+            left: heart.left,
+            animationDelay: heart.delay,
+            animationDuration: heart.duration,
+          }}
+        >
+          ❤️
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default FloatingHearts
