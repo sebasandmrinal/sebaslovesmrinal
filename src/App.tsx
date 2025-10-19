@@ -6,7 +6,7 @@ import SpecialMessage from './pages/SpecialMessage'
 
 function App() {
   return (
-    <Router basename="/romantic-website">
+    <Router> {/* ← NO basename prop */}
       <div className="min-h-screen bg-background">
         <Routes>
           <Route path="/" element={<Home />} />
